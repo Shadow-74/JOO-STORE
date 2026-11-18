@@ -1134,3 +1134,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.includes('admin.html')) {
+        if (checkAdminAuth()) {
+            renderAdminDashboard();
+            updateMaintenanceButtonUI();
+            
+            if (typeof syncUsersFromCloud === 'function') {
+                syncUsersFromCloud(() => renderAdminDashboard());
+            }
+            if (typeof syncMessagesFromCloud === 'function') {
+                syncMessagesFromCloud(() => renderAdminMessages());
+            }
+            // أضف هذا السطر هنا لتتم مزامنة الطلبات لحظياً:
+            if (typeof syncOrdersFromCloud === 'function') {
+                syncOrdersFromCloud(() => renderAdminOrders());
+            }
+        }
+    }
+});
