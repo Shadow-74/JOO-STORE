@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOO STORE - Profile & Order History</title>
+    <link rel="icon" href="https://i.ibb.co/bRJNQB5c/final1200.png">
+    <link rel="stylesheet" href="./try.css">
+    <link rel="stylesheet" href="./try.css">
+    <script src="auth-guard.js"></script>
+</head>
+</head>
+<body>
+   
+    <header>
+        <img src="https://i.ibb.co/bRJNQB5c/final1200.png" width="80" alt="JOO STORE Logo"> 
+    </header>
+
+    <!-- شريط التنقل (ثابت الاتجاه) -->
+    <nav class="nav-container">
+        <div class="sd-card">
+            <a href="./index.html">HOME</a>
+        </div>
+        <div class="sd-card">
+            <a href="./Prodacte.html">Prodacte</a>
+        </div>
+        <div class="sd-card">
+            <a href="./Shopping Cart.html">Shopping Cart <span class="cart-badge">0</span></a>
+        </div>
+        <div class="sd-card active">
+            <a href="./Profile.html">Profile</a>
+        </div>
+        <div class="sd-card">
+            <a href="#con">Contact Us</a>
+        </div>
+        <div class="sd-card">
+            <a href="./Account.html">Account</a>
+        </div>
+    </nav>
+
+    <!-- عنوان الصفحة -->
+    <div class="section-title">
+        <h2>الملف الشخصي وسجل المشتريات | Profile 👤</h2>
+        <p>بياناتك الشخصية وجميع المشتريات والطلبات السابقة مع إجمالي الأسعار</p>
+    </div>
+
+    <!-- محتوى البروفايل الرئيسي -->
+    <main class="profile-page-container">
+        
+        <!-- بطاقة بيانات العميل -->
+        <div class="user-profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar-container">
+                    <div class="profile-avatar">
+                        <img id="profile-avatar-img" src="https://i.ibb.co/bRJNQB5c/final1200.png" alt="User Avatar">
+                    </div>
+                    <button type="button" class="avatar-edit-badge" onclick="openEditProfileModal()" title="تغيير الصورة الشخصية">📷</button>
+                </div>
+                <div class="profile-info-text">
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                        <h2 id="profile-name">محمد السيد</h2>
+                        <span id="profile-role-tag" class="role-badge">عميل JOO STORE ✓</span>
+                    </div>
+                    <p id="profile-email">mohamed.elsayed@example.com</p>
+                    <p id="profile-phone">📱 01093901120</p>
+                </div>
+            </div>
+
+            <!-- إحصائيات سريعة للعميل -->
+            <div class="profile-stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-value" id="stats-orders-count">2</div>
+                    <div class="stat-label">طلبات سابقة</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value" id="stats-total-spent">4,540 ج.م</div>
+                    <div class="stat-label">إجمالي المشتريات</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value" id="stats-account-status">نشط ومميز</div>
+                    <div class="stat-label">حالة الحساب</div>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button type="button" class="profile-btn edit-profile-btn" onclick="openEditProfileModal()">✏️ تعديل الملف الشخصي والصورة</button>
+                <a href="./Prodacte.html" class="profile-btn shop-btn">تسوق منتجات جديدة 🛒</a>
+                <a href="./Account.html" class="profile-btn switch-account-btn">تبديل الحساب / تسجيل الخروج 🔐</a>
+            </div>
+        </div>
+
+        <!-- قسم سجل المشتريات السابقة -->
+        <div class="orders-history-wrapper">
+            <div class="orders-section-header">
+                <h3>سجل المشتريات السابقة (Order History)</h3>
+                <span class="orders-count-badge" id="orders-badge-count">2 طلبات</span>
+            </div>
+
+            <!-- قائمة الطلبات (يتم ملؤها ديناميكياً بواسطة JavaScript) -->
+            <div id="orders-list-container" class="orders-list"></div>
+        </div>
+
+        <!-- نافذة تعديل بيانات الملف الشخصي (Edit Profile Modal) -->
+        <div id="edit-profile-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>✏️ تعديل بيانات الملف الشخصي والصورة</h3>
+                    <button type="button" class="modal-close-btn" onclick="closeEditProfileModal()">&times;</button>
+                </div>
+                
+                <form onsubmit="handleSaveProfile(event)" class="modal-form">
+                    <!-- تعديل الصورة الشخصية -->
+                    <div class="avatar-edit-section">
+                        <div class="avatar-preview-wrapper">
+                            <img id="edit-avatar-preview" src="https://i.ibb.co/bRJNQB5c/final1200.png" alt="معاينة الصورة">
+                        </div>
+                        <div class="avatar-upload-options">
+                            <label for="edit-avatar-upload" class="upload-avatar-btn">
+                                📁 رفع صورة من جهازك
+                            </label>
+                            <input type="file" id="edit-avatar-upload" accept="image/*" style="display: none;" onchange="previewUploadedAvatar(event)">
+                            <div class="avatar-upload-hint">أو اختر صورة رمزية سريعة:</div>
+                        </div>
+                    </div>
+
+                    <!-- صور رمزية طبية جاهزة للاختيار السريع -->
+                    <div class="preset-avatars-grid">
+                        <img src="https://i.ibb.co/bRJNQB5c/final1200.png" class="preset-avatar" onclick="selectPresetAvatar(this)" alt="شعار JOO STORE" title="شعار المتجر">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80" class="preset-avatar" onclick="selectPresetAvatar(this)" alt="طبيب" title="صورة طبيب">
+                        <img src="https://images.unsplash.com/photo-1594824813587-57d620573989?w=150&auto=format&fit=crop&q=80" class="preset-avatar" onclick="selectPresetAvatar(this)" alt="طبيبة" title="صورة طبيبة">
+                        <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80" class="preset-avatar" onclick="selectPresetAvatar(this)" alt="صيدلي" title="صورة صيدلي">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&auto=format&fit=crop&q=80" class="preset-avatar" onclick="selectPresetAvatar(this)" alt="مختبر" title="صورة مختبر">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-name">الاسم بالكامل</label>
+                        <input type="text" id="edit-name" required placeholder="اسمك الكريم">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-email">البريد الإلكتروني</label>
+                        <input type="email" id="edit-email" required placeholder="example@domain.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-phone">رقم الهاتف (الواتساب)</label>
+                        <input type="tel" id="edit-phone" required placeholder="010XXXXXXXX">
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="submit" class="save-profile-btn">💾 حفظ التعديلات</button>
+                        <button type="button" class="cancel-modal-btn" onclick="closeEditProfileModal()">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <hr width="500">
+
+    <!-- قسم الفيديو والتواصل -->
+    <div class="video-card-container" id="con">
+        <video src="./background.mp4" autoplay loop muted playsinline class="inner-video"></video>
+        <div class="video-text-overlay">
+            <h2>تواصل معنا للطلب والاستفسار</h2>
+            <p>لطلب أي من المستلزمات الطبية أو للاستفسار عن الأسعار، اضغط هنا للتواصل الفوري</p>
+            <a href="https://wa.me/201093901120" target="_blank" rel="noopener noreferrer" class="whatsapp-btn-order">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.707 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                </svg>
+                <span> 01093901120</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>DEV:@srt_741 </footer>
+
+    <!-- ملفات السكريبت -->
+    <script src="cart.js"></script>
+</body>
+</html>

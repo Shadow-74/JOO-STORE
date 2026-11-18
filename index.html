@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOO STORE</title>
+    <link rel="icon" href="https://i.ibb.co/bRJNQB5c/final1200.png">
+    <link rel="stylesheet" href="./try.css">
+    <script src="auth-guard.js"></script>
+</head>
+<body>
+     <header>
+        <img src="https://i.ibb.co/bRJNQB5c/final1200.png" width="80" alt="JOO STORE Logo"> 
+    </header>
+    
+
+    <nav class="nav-container">
+        <div class="sd-card active">
+            <a href="./index.html">HOME</a>
+        </div>
+        <div class="sd-card">
+            <a href="./Prodacte.html">Prodacte</a>
+        </div>
+        <div class="sd-card">
+            <a href="./Shopping Cart.html">Shopping Cart <span class="cart-badge">0</span></a>
+        </div>
+        <div class="sd-card">
+            <a href="./Profile.html">Profile</a>
+        </div>
+        <div class="sd-card">
+            <a href="#con">Contact Us</a>
+        </div>
+        <div class="sd-card">
+            <a href="./Account.html">Account</a>
+        </div>
+    </nav>
+
+    <!-- الواجهة الترحيبية الحديثة (Hero Section) -->
+    <div class="home-hero-container">
+        <div class="hero-card">
+            <div class="home-badge-pill">
+                <span>💎 المتجر الطبي المعتمد الأول | JOO MEDICAL SUPPLIES</span>
+            </div>
+            <h1 style="font-size: 32px; margin: 10px 0; color: #ffffff; text-shadow: 0 0 15px rgba(2, 155, 202, 0.6);">
+                WELCOME TO JOO STORE
+            </h1>
+            <h3 style="color: #90e0ef; font-weight: normal; margin-bottom: 20px;">
+                متخصصون في توريد أحدث وأفضل المستلزمات والمعدات الطبية للعيادات والمستشفيات والمعامل
+            </h3>
+            <hr width="300" style="border: 0; border-top: 1px solid rgba(2, 155, 202, 0.4); margin: 20px auto;">
+            
+            <div class="home-cta-actions">
+                <a href="./Prodacte.html" class="home-primary-btn">
+                    <span>🛒 تصفح المنتجات والأسعار</span>
+                </a>
+                <a href="https://wa.me/201093901120" target="_blank" rel="noopener noreferrer" class="home-secondary-btn">
+                    <span>💬 تواصل فوري عبر واتساب</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- بطاقات مميزات المتجر الطبي (Feature Highlights) -->
+    <div class="home-features-grid">
+        <div class="home-feature-card">
+            <div class="home-feature-icon">🚚</div>
+            <h4 class="home-feature-title">شحن وتوصيل فوري</h4>
+            <p class="home-feature-desc">توصيل سريع وآمن لجميع المحافظات مع تغليف معقم ومحكم لكافة المعدات الطبية.</p>
+        </div>
+
+        <div class="home-feature-card">
+            <div class="home-feature-icon">🛡️</div>
+            <h4 class="home-feature-title">جودة طبية معتمدة</h4>
+            <p class="home-feature-desc">جميع المنتجات والأدوات مطابقة للمواصفات القياسية الطبية وبأعلى معايير الأمان.</p>
+        </div>
+
+        <div class="home-feature-card">
+            <div class="home-feature-icon">🏷️</div>
+            <h4 class="home-feature-title">أفضل الأسعار وخصومات</h4>
+            <p class="home-feature-desc">أسعار تنافسية وخصومات خاصة للأطباء والمراكز الطبية مع كوبونات حصرية.</p>
+        </div>
+    </div>
+
+    <!-- معرض المستلزمات الطبية المميزة -->
+    <main>
+        <article>
+            <figure style="margin: 25px 0;">
+                <a href="./Prodacte.html" title="اضغط هنا لتصفح المنتجات">
+                    <img src="https://i.ibb.co/PZDfbVjk/items.png" width="550" style="max-width: 90%; border-radius: 16px; box-shadow: 0 10px 35px rgba(0,0,0,0.5); transition: 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                </a>
+            </figure>
+        </article>
+    </main>
+    <br>
+    <hr width="500">
+
+    <div class="hawf">
+    <h3 style="color: #48cae4; margin-bottom: 10px;">📩 أرسل استفسارك أو طلبك لإدارة المتجر</h3>
+    <textarea id="contact-message-input" cols="40" rows="6" placeholder="اكتب رسالتك أو تفاصيل طلبك هنا..." style="background: rgba(11, 46, 113, 0.85); color: white; border: 1px solid #48cae4; border-radius: 10px; padding: 12px; resize: none; width: 100%; max-width: 450px;"></textarea>
+    <br>
+    <button type="button" onclick="submitContactMessage()" style="background-color: #02a0e2; color: white; border: none; padding: 12px 28px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px;">إرسال الرسالة 🚀</button>
+</div>
+
+        </div>
+    </div>
+
+
+
+
+    <footer>DEV:@srt_741 </footer>
+   
+
+    <script src="cart.js"></script>
+    <!-- مكتبات Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-db.js"></script>
+<script src="cart.js"></script>
+
+<script>
+async function submitContactMessage() {
+    const input = document.getElementById('contact-message-input');
+    const text = input ? input.value.trim() : '';
+
+    if (!text) {
+        alert("⚠️ من فضلك اكتب رسالتك أولاً قبل الضغط على إرسال!");
+        return;
+    }
+
+    let currentUser = null;
+    try {
+        currentUser = JSON.parse(localStorage.getItem('joo_current_user'));
+    } catch (e) {}
+
+    const msgObj = {
+        id: 'MSG-' + Date.now(),
+        senderName: currentUser ? currentUser.name : 'زائر',
+        senderPhone: currentUser ? (currentUser.phone || 'غير متوفر') : 'غير متوفر',
+        senderEmail: currentUser ? (currentUser.email || 'غير متوفر') : 'غير متوفر',
+        message: text,
+        date: new Date().toLocaleString('ar-EG'),
+        createdAt: Date.now()
+    };
+
+    const sent = typeof sendContactMessageToCloud === 'function' ? await sendContactMessageToCloud(msgObj) : false;
+
+    if (sent) {
+        input.value = '';
+        alert("✅ تم إرسال رسالتك بنجاح إلى إدارة JOO STORE! سنقوم بمراجعتها والرد عليك قريباً.");
+    } else {
+        alert("⚠️ حدث خطأ أثناء الإرسال، تأكد من اتصالك بالإنترنت وحاول مرة أخرى.");
+    }
+}
+</script>
+</body>
+</html>

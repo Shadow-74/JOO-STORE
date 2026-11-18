@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOO STORE - Profile & Order History</title>
+    <link rel="icon" href="https://i.ibb.co/bRJNQB5c/final1200.png">
+    <link rel="stylesheet" href="./try.css">
+    <script src="auth-guard.js"></script>
+</head>
+<body>
+
+    <header>
+        <img src="https://i.ibb.co/bRJNQB5c/final1200.png" width="80" alt="JOO STORE Logo"> 
+    </header>
+
+    <nav class="nav-container">
+        <div class="sd-card">
+            <a href="./index.html">HOME</a>
+        </div>
+        <div class="sd-card active">
+            <a href="./Prodacte.html">Products</a>
+        </div>
+        <div class="sd-card">
+            <a href="./Shopping Cart.html">Shopping Cart <span class="cart-badge">0</span></a>
+        </div>
+        <div class="sd-card">
+            <a href="./Profile.html">Profile</a>
+        </div>
+        <div class="sd-card">
+            <a href="#con">Contact Us</a>
+        </div>
+        <div class="sd-card">
+            <a href="./Account.html">Account</a>
+        </div>
+    </nav>
+
+    <!-- عنوان قسم المنتجات -->
+    <div class="section-title">
+        <h2>منتجاتنا الطبية | Medical Products 🩺</h2>
+        <p>تشكيلة مميزة من أفضل المستلزمات والمعدات الطبية بأعلى جودة وأفضل الأسعار</p>
+    </div>
+
+    <!-- شريط البحث الفوري والفلترة بالأقسام الطبية -->
+    <div class="products-filter-wrapper">
+        <div class="products-search-box">
+            <input type="text" id="product-search-input" class="products-search-input" placeholder="🔍 ابحث بالاسم عن أي منتج طبي..." oninput="filterMedicalProducts()">
+        </div>
+        <div class="category-pills-row">
+            <button type="button" class="cat-pill active" onclick="setProductCategory('all', this)">🌐 جميع المنتجات</button>
+            <button type="button" class="cat-pill" onclick="setProductCategory('diagnostic', this)">🩺 أجهزة فحص وتشخيص</button>
+            <button type="button" class="cat-pill" onclick="setProductCategory('lab', this)">🧪 معامل وتحاليل</button>
+            <button type="button" class="cat-pill" onclick="setProductCategory('clinic', this)">🩹 عيادات وجراحة</button>
+            <button type="button" class="cat-pill" onclick="setProductCategory('emergency', this)">🧰 إسعافات ورعاية</button>
+        </div>
+    </div>
+
+    <!-- شبكة المنتجات -->
+    <main class="products-section">
+        <div class="products-grid">
+
+            <!-- المنتجات الـ 15 الأساسية -->
+            <div class="product-card" data-category="lab">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/7xVQwcvm/medical-supply-1.png" alt="مستلزمات المعامل و التحاليل" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">مستلزمات المعامل و التحاليل</h3>
+                    <div class="product-price">
+                        <span class="price-val">1,850</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p1', 'مستلزمات المعامل و التحاليل', 1850, 'https://i.ibb.co/7xVQwcvm/medical-supply-1.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="clinic">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/v6ShZpQh/medical-supply-elements-2.png" alt="أدوات جراحية متطورة" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">أدوات جراحية متطورة</h3>
+                    <div class="product-price">
+                        <span class="price-val">950</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p2', 'أدوات جراحية متطورة', 950, 'https://i.ibb.co/v6ShZpQh/medical-supply-elements-2.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="diagnostic">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/tM9FTCNv/medical-supply-elements-4.png" alt="أجهزة الفحص والتشخيص" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">أجهزة الفحص والتشخيص</h3>
+                    <div class="product-price">
+                        <span class="price-val">1,200</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p3', 'أجهزة الفحص والتشخيص', 1200, 'https://i.ibb.co/tM9FTCNv/medical-supply-elements-4.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="clinic">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/M52vdRdH/medical-sup1.png" alt="مستلزمات العيادات الطبية" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">مستلزمات العيادات الطبية</h3>
+                    <div class="product-price">
+                        <span class="price-val">650</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p4', 'مستلزمات العيادات الطبية', 650, 'https://i.ibb.co/M52vdRdH/medical-sup1.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="emergency">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/QFNswDQh/medical-supply-elements-5.png" alt="حقائب الإسعافات الأولية" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">حقائب الإسعافات الأولية</h3>
+                    <div class="product-price">
+                        <span class="price-val">420</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p5', 'حقائب الإسعافات الأولية', 420, 'https://i.ibb.co/QFNswDQh/medical-supply-elements-5.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="emergency">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/CpC9Gz0D/medical-supply-elements-7.png" alt="معدات الرعاية الطبية" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">معدات الرعاية الطبية</h3>
+                    <div class="product-price">
+                        <span class="price-val">1,500</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p6', 'معدات الرعاية الطبية', 1500, 'https://i.ibb.co/CpC9Gz0D/medical-supply-elements-7.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="lab">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/SwdBwmvz/medical-sup2.png" alt="مستلزمات المعامل والتحاليل" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">مستلزمات المعامل والتحاليل</h3>
+                    <div class="product-price">
+                        <span class="price-val">780</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p7', 'مستلزمات المعامل والتحاليل', 780, 'https://i.ibb.co/SwdBwmvz/medical-sup2.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="diagnostic">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/VpBT87y2/4.png" alt="طقم فحص طبي شامل" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">طقم فحص طبي شامل</h3>
+                    <div class="product-price">
+                        <span class="price-val">1,100</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p8', 'طقم فحص طبي شامل', 1100, 'https://i.ibb.co/VpBT87y2/4.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="emergency">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/r2cH2pyV/medical-sup2.png" alt="مستلزمات الوقاية والرعاية" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">مستلزمات الوقاية والرعاية</h3>
+                    <div class="product-price">
+                        <span class="price-val">350</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p9', 'مستلزمات الوقاية والرعاية', 350, 'https://i.ibb.co/r2cH2pyV/medical-sup2.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="emergency">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/DBwFmTv/10.png" alt="مجموعة مستلزمات متكاملة" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">مجموعة مستلزمات متكاملة</h3>
+                    <div class="product-price">
+                        <span class="price-val">890</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p10', 'مجموعة مستلزمات متكاملة', 890, 'https://i.ibb.co/DBwFmTv/10.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="emergency">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/Kcph7w9S/7.png" alt="طقم إسعافات ورعاية" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">طقم إسعافات ورعاية</h3>
+                    <div class="product-price">
+                        <span class="price-val">480</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p11', 'طقم إسعافات ورعاية', 480, 'https://i.ibb.co/Kcph7w9S/7.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="diagnostic">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/ycXdDgyV/Gemini-Generated-Image-n9j01hn9j01hn9j0.jpg" alt="أجهزة طبية حديثة" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">أجهزة طبية حديثة</h3>
+                    <div class="product-price">
+                        <span class="price-val">750</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p12', 'أجهزة طبية حديثة', 750, 'https://i.ibb.co/ycXdDgyV/Gemini-Generated-Image-n9j01hn9j01hn9j0.jpg')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="diagnostic">
+                <div class="product-img-box">
+                    <img src="https://i.ibb.co/JFnvxKh8/8.png" alt="جهاز قياس نسبة السكر" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">جهاز قياس نسبة السكر</h3>
+                    <div class="product-price">
+                        <span class="price-val">1,350</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p13', 'جهاز قياس نسبة السكر', 1350, 'https://i.ibb.co/JFnvxKh8/8.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="clinic">
+                <div class="product-img-box">
+                    <img src="./photo/JOO PHOTO/medical-syringe.png" onerror="this.src='https://i.ibb.co/bRvjFVFY/medical-syringe.png'" alt="حقنة طبية دقيقة" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">حقنة طبية دقيقة</h3>
+                    <div class="product-price">
+                        <span class="price-val">280</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p14', 'حقنة طبية دقيقة', 280, './photo/JOO PHOTO/medical-syringe.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="diagnostic">
+                <div class="product-img-box">
+                    <img src="./photo/JOO PHOTO/medical-bp-set.png" onerror="this.src='https://i.ibb.co/LXm9w6bQ/medical-supply-10-removebg-preview.png'" alt="أدوات تشخيص وفحص متقدمة" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">أدوات تشخيص وفحص متقدمة</h3>
+                    <div class="product-price">
+                        <span class="price-val">1,200</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p15', 'أدوات تشخيص وفحص متقدمة', 1200, './photo/JOO PHOTO/medical-bp-set.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <!-- الأجهزة الجديدة بصورها الطبية الاحترافية -->
+            <div class="product-card" data-category="diagnostic">
+                <div class="product-img-box">
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=500&auto=format&fit=crop&q=80" alt="جهاز الفحص السريري المتطور" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">جهاز الفحص السريري المتطور</h3>
+                    <div class="product-price">
+                        <span class="price-val">4,200</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p16', 'جهاز الفحص السريري المتطور', 4200, 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=500&auto=format&fit=crop&q=80')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="clinic">
+                <div class="product-img-box">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=500&auto=format&fit=crop&q=80" alt="مونيتور متابعة العلامات الحيوية" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">مونيتور متابعة العلامات الحيوية</h3>
+                    <div class="product-price">
+                        <span class="price-val">6,800</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p17', 'مونيتور متابعة العلامات الحيوية', 6800, 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=500&auto=format&fit=crop&q=80')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="clinic">
+                <div class="product-img-box">
+                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=500&auto=format&fit=crop&q=80" alt="جهاز تعقيم أدوات طبي" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">جهاز تعقيم أدوات طبي (أوتوكلاف)</h3>
+                    <div class="product-price">
+                        <span class="price-val">5,500</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p18', 'جهاز تعقيم أدوات طبي', 5500, 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=500&auto=format&fit=crop&q=80')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-box">
+                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500&auto=format&fit=crop&q=80" alt="كشاف عمليات وفحص LED محمول" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">كشاف عمليات وفحص LED محمول</h3>
+                    <div class="product-price">
+                        <span class="price-val">2,100</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p19', 'كشاف عمليات وفحص LED محمول', 2100, 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500&auto=format&fit=crop&q=80')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="clinic">
+                <div class="product-img-box">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=500&auto=format&fit=crop&q=80" alt="سرير وترابيزة كشف طبي" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">سرير وترابيزة كشف طبي للعيادات</h3>
+                    <div class="product-price">
+                        <span class="price-val">4,900</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p20', 'سرير وترابيزة كشف طبي', 4900, 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=500&auto=format&fit=crop&q=80')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <!-- المنتجات الحصرية المضافة (صور معزولة الشفافية PNG) -->
+            <div class="product-card" data-category="diagnostic">
+                <div class="product-img-box">
+                    <img src="./photo/JOO PHOTO/medical-desk-set.png" alt="طقم مكتب الطبيب والفحص المتكامل" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">طقم مكتب الطبيب والفحص المتكامل</h3>
+                    <div class="product-price">
+                        <span class="price-val">1,450</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p21', 'طقم مكتب الطبيب والفحص المتكامل', 1450, './photo/JOO PHOTO/medical-desk-set.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="clinic">
+                <div class="product-img-box">
+                    <img src="./photo/JOO PHOTO/medical-mask-set.png" alt="طقم الوقاية والفحص السريري الشامل" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">طقم الوقاية والفحص السريري الشامل</h3>
+                    <div class="product-price">
+                        <span class="price-val">620</span> <span class="currency">ج.م</span>
+                    </div>
+                    <button type="button" class="order-btn" onclick="addToCart('p22', 'طقم الوقاية والفحص السريري الشامل', 620, './photo/JOO PHOTO/medical-mask-set.png')">طلب المنتج 🛒</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <hr width="500">
+
+    <!-- قسم الفيديو مع مساحة لكتابة التفاصيل والتواصل -->
+    <div class="video-card-container" id="con">
+        <video src="./background.mp4" autoplay loop muted playsinline class="inner-video"></video>
+        <div class="video-text-overlay">
+            <h2>تواصل معنا للطلب والاستفسار</h2>
+            <p>لطلب أي من المستلزمات الطبية أو للاستفسار عن الأسعار، اضغط هنا للتواصل الفوري</p>
+            <a href="https://wa.me/201093901120" target="_blank" rel="noopener noreferrer" class="whatsapp-btn-order">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.707 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                </svg>
+                <span> 01093901120</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>DEV:@srt_741 </footer>
+
+    <!-- ملف السلة البرمجي -->
+    <script src="cart.js"></script>
+</body>
+</html>
