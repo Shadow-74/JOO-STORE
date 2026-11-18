@@ -49,18 +49,18 @@
             </div>
 
             <!-- 1. نموذج تسجيل الدخول (Login Form) -->
-            <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
+            <form id="login-form" class="auth-form" onsubmit="validateLoginAndSubmit(event)">
                 <h2 class="form-title">مرحباً بك مجدداً</h2>
                 <p class="form-subtitle">سجل دخولك لمتابعة طلباتك ومشترياتك الطبية</p>
 
                 <div class="form-group">
                     <label for="login-email">البريد الإلكتروني أو رقم الهاتف</label>
-                    <input type="text" id="login-email" placeholder="example@email.com" required>
+                    <input type="text" id="login-email" placeholder="example@email.com أو 010XXXXXXXX" required>
                 </div>
 
                 <div class="form-group">
                     <label for="login-password">كلمة المرور</label>
-                    <input type="password" id="login-password" placeholder="••••••••" required>
+                    <input type="password" id="login-password" placeholder="••••••••" required minlength="6">
                 </div>
 
                 <div class="form-options">
@@ -79,13 +79,13 @@
             </form>
 
             <!-- 2. نموذج إنشاء حساب جديد (Register Form) -->
-            <form id="register-form" class="auth-form" style="display: none;" onsubmit="handleRegister(event)">
+            <form id="register-form" class="auth-form" style="display: none;" onsubmit="validateRegisterAndSubmit(event)">
                 <h2 class="form-title">إنشاء حساب جديد</h2>
                 <p class="form-subtitle">انضم إلى JOO STORE للاستفادة من أسرع تجربة طلب</p>
 
                 <div class="form-group">
                     <label for="reg-name">الاسم بالكامل</label>
-                    <input type="text" id="reg-name" placeholder="User Name" required>
+                    <input type="text" id="reg-name" placeholder="الاسم الثلاثي" required minlength="3">
                 </div>
 
                 <div class="form-group">
@@ -95,29 +95,29 @@
 
                 <div class="form-group">
                     <label for="reg-phone">رقم الهاتف (واتساب)</label>
-                    <input type="tel" id="reg-phone" placeholder="010XXXXXXXX" pattern="[0-9]{11}" title="يرجى إدخال 11 رقم" required>
+                    <input type="tel" id="reg-phone" placeholder="010XXXXXXXX" maxlength="11" required>
                 </div>
 
-                <!-- حقل الموقع والعنوان الجديد -->
+                <!-- حقل الموقع والعنوان -->
                 <div class="form-group">
                     <label for="reg-location">العنوان أو الموقع (للتوصيل والشحن) 📍</label>
-                    <input type="text" id="reg-location" placeholder="مثال: القاهرة - التجمع الخامس - شارع..." required>
+                    <input type="text" id="reg-location" placeholder="مثال: القاهرة - التجمع الخامس - شارع..." required minlength="5">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="password">كلمة المرور</label>
-                        <input type="password" id="password" placeholder="••••••••" required minlength="6">
+                        <input type="password" id="password" placeholder="••••••••" required minlength="6" oninput="checkPasswordMatchLive()">
                     </div>
 
                     <div class="form-group">
                         <label for="confirm-password">تأكيد كلمة المرور</label>
-                        <input type="password" id="confirm-password" placeholder="••••••••" required minlength="6">
+                        <input type="password" id="confirm-password" placeholder="••••••••" required minlength="6" oninput="checkPasswordMatchLive()">
                     </div>
                 </div>
 
                 <!-- رسالة التحقق التفاعلية من تطابق كلمتي المرور -->
-                <div id="match-msg" class="validation-msg"></div>
+                <div id="match-msg" class="validation-msg" style="font-size: 13px; margin-bottom: 10px; font-weight: bold;"></div>
 
                 <div class="form-row">
                     <div class="form-group">
@@ -153,8 +153,6 @@
                 </div>
             </form>
 
-           
-
         </div>
     </main>
 
@@ -177,9 +175,6 @@
 
     <footer>DEV:@srt_741 </footer>
 
-    <!-- ملفات السكريبت -->
-   <footer>DEV:@srt_741 </footer>
-
     <!-- مكتبات Firebase والربط السحابي -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -188,5 +183,114 @@
     <!-- ملفات السكريبت -->
     <script src="cart.js"></script>
     <script src="pass.js"></script>
+
+    <!-- سكريبت التحقق من صحة المدخلات (Form Validation) -->
+    <script>
+        // 1. فحص تطابق كلمة المرور لحظياً أثناء الكتابة
+        function checkPasswordMatchLive() {
+            const pass = document.getElementById('password').value;
+            const confirmPass = document.getElementById('confirm-password').value;
+            const msgEl = document.getElementById('match-msg');
+
+            if (!confirmPass) {
+                msgEl.textContent = '';
+                return;
+            }
+
+            if (pass === confirmPass) {
+                msgEl.textContent = '✅ كلمتا المرور متطابقتان';
+                msgEl.style.color = '#2ed573';
+            } else {
+                msgEl.textContent = '❌ كلمتا المرور غير متطابقتين';
+                msgEl.style.color = '#ff4757';
+            }
+        }
+
+        // 2. التحقق الشامل عند إنشاء حساب جديد
+        function validateRegisterAndSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            const location = document.getElementById('reg-location').value.trim();
+            const pass = document.getElementById('password').value;
+            const confirmPass = document.getElementById('confirm-password').value;
+
+            // فحص الاسم
+            if (name.length < 3) {
+                alert('⚠️ يرجى إدخال الاسم بالكامل (3 أحرف على الأقل).');
+                document.getElementById('reg-name').focus();
+                return false;
+            }
+
+            // فحص صيغة البريد الإلكتروني
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('⚠️ صيغة البريد الإلكتروني غير صحيحة (مثال: name@example.com).');
+                document.getElementById('reg-email').focus();
+                return false;
+            }
+
+            // فحص رقم الهاتف المصري (11 رقم ويبدأ بـ 010 أو 011 أو 012 أو 015)
+            const phoneRegex = /^01[0125][0-9]{8}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('⚠️ رقم الهاتف غير صحيح! يجب إدخال رقم هاتف مصري مكون من 11 رقماً ويبدأ بـ (010 / 011 / 012 / 015).');
+                document.getElementById('reg-phone').focus();
+                return false;
+            }
+
+            // فحص العنوان
+            if (location.length < 5) {
+                alert('⚠️ يرجى إدخال عنوان واضح ومفصل لتوصيل الطلبات.');
+                document.getElementById('reg-location').focus();
+                return false;
+            }
+
+            // فحص طول كلمة المرور
+            if (pass.length < 6) {
+                alert('⚠️ كلمة المرور ضعيفة، يجب أن تتكون من 6 أحرف أو أرقام على الأقل.');
+                document.getElementById('password').focus();
+                return false;
+            }
+
+            // فحص تطابق كلمتي المرور
+            if (pass !== confirmPass) {
+                alert('⚠️ كلمتا المرور غير متطابقتين، يرجى التأكد من كتابتهما بشكل صحيح.');
+                document.getElementById('confirm-password').focus();
+                return false;
+            }
+
+            // استدعاء دالة التسجيل الأصلية في pass.js بعد نجاح جميع الفحوصات
+            if (typeof handleRegister === 'function') {
+                handleRegister(event);
+            }
+        }
+
+        // 3. التحقق الأساسي عند تسجيل الدخول
+        function validateLoginAndSubmit(event) {
+            event.preventDefault();
+
+            const loginInput = document.getElementById('login-email').value.trim();
+            const loginPass = document.getElementById('login-password').value;
+
+            if (!loginInput) {
+                alert('⚠️ يرجى إدخال البريد الإلكتروني أو رقم الهاتف.');
+                document.getElementById('login-email').focus();
+                return false;
+            }
+
+            if (loginPass.length < 6) {
+                alert('⚠️ كلمة المرور غير صحيحة (يجب ألا تقل عن 6 أحرف).');
+                document.getElementById('login-password').focus();
+                return false;
+            }
+
+            // استدعاء دالة تسجيل الدخول الأصلية في pass.js
+            if (typeof handleLogin === 'function') {
+                handleLogin(event);
+            }
+        }
+    </script>
 </body>
 </html>
