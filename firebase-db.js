@@ -87,3 +87,39 @@ async function deleteMessageFromCloud(msgId) {
         console.error("Error deleting message:", e);
     }
 }
+// حفظ طلب جديد على سحابة Firebase
+async function saveOrderToCloud(orderObj) {
+    try {
+        await db.collection('orders').doc(orderObj.id).set(orderObj);
+        return true;
+    } catch (e) {
+        console.error("Error saving order:", e);
+        return false;
+    }
+}
+
+// جلب ومزامنة الطلبات في لوحة الأدمن في الوقت الفعلي
+function syncOrdersFromCloud(onUpdateCallback) {
+    db.collection('orders').onSnapshot((snapshot) => {
+        const cloudOrders = [];
+        snapshot.forEach((doc) => {
+            cloudOrders.push({ id: doc.id, ...doc.data() });
+        });
+        cloudOrders.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        localStorage.setItem('joo_order_history', JSON.stringify(cloudOrders));
+        if (typeof onUpdateCallback === 'function') {
+            onUpdateCallback(cloudOrders);
+        }
+    }, (error) => {
+        console.error("Firebase Orders Sync Error:", error);
+    });
+}
+
+// حذف طلب من Firebase
+async function deleteOrderFromCloud(orderId) {
+    try {
+        await db.collection('orders').doc(orderId).delete();
+    } catch (e) {
+        console.error("Error deleting order:", e);
+    }
+}
